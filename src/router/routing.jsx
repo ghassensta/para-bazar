@@ -1,16 +1,15 @@
-import { lazy, Suspense } from "react";
-import { Outlet } from "react-router-dom";
-import LayoutTheme from "../layouts/layout";
-import LoadingScreen from "../components/loading-screen/loading-screen";
-import DashboardLayout from "../layouts/dashboardLayout";
-import { AuthGuard } from "../auth/guard/auth-guard";
+import { lazy, Suspense } from 'react'
+import { Outlet } from 'react-router-dom'
+import LayoutTheme from '../layouts/layout'
+import LoadingScreen from '../components/loading-screen/loading-screen'
+import { AuthGuard } from '../auth/guard/auth-guard'
 
-// Pages principales
-const Index = lazy(() => import("../pages/home/index"));
+const Index      = lazy(() => import('../pages/home/index'))
+const NotFound   = lazy(() => import('../pages/not-found'))     // ← à créer
 
 export const routes = [
   {
-    path: "/",
+    path: '/',
     element: (
       <LayoutTheme>
         <Suspense fallback={<LoadingScreen />}>
@@ -19,41 +18,15 @@ export const routes = [
       </LayoutTheme>
     ),
     children: [
-      // === Anciennes routes dynamiques ===
-      { element: <Index />, index: true },
-      { element: <Index />, path: "home" },
-      {
-        element: (
-          <AuthGuard>
-          </AuthGuard>
-        ),
-      },
-   
-      // === Nouvelles routes statiques ===
-      // { element: <ViewProduct />, path: "spa" },
-      //{ element: <Conditions />, path: "conditions" },
+      { index: true,    element: <Index /> },
+      { path: 'home',   element: <Index /> },
 
-     
-      // === Dashboard ===
-      {
-        path: "dashboard",
-        element: (
-          <AuthGuard>
-            <DashboardLayout>
-              <Suspense fallback={<LoadingScreen />}>
-                <Outlet />
-              </Suspense>
-            </DashboardLayout>
-          </AuthGuard>
-        ),
-        children: [
-       //   { element: <DashboardMain />, index: true },
+      // ── Routes catégories ──────────────────────────────────
+      { path: 'category/:slug',             element: <Index /> }, // temporaire
+      { path: 'category/:slug/:subSlug',    element: <Index /> }, // sous-catégories
 
-          
-
-         // { path: "*", element: <DashboardMain /> },
-        ],
-      },
+      // ── 404 catch-all ──────────────────────────────────────
+      { path: '*', element: <NotFound /> },
     ],
   },
-];
+]

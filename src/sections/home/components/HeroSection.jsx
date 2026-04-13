@@ -68,7 +68,7 @@ const SLIDES = [
 
 export default function HeroSection() {
   return (
-    <section className="mx-4 my-4 rounded-2xl overflow-hidden border border-gray-100">
+    <section className="mx-4 my-4 rounded-2xl overflow-hidden border border-gray-100 md:px-6">
 
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
