@@ -1,6 +1,11 @@
+// src/sections/home/components/PopularProductsSection.jsx
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiShoppingCart, FiStar, FiChevronRight } from 'react-icons/fi'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, FreeMode } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/free-mode'
 
 const TABS = [
   'Breads & Bakery',
@@ -10,14 +15,55 @@ const TABS = [
 ]
 
 const PRODUCTS = [
-  { id: 1, name: '100 Percent Apple Juice – 64 fl oz Bottle', price: '$25.99', oldPrice: '$38.10', rating: 4, img: 'https://placehold.co/160x180/fff7ed/ea580c?text=Apple+Juice' },
-  { id: 2, name: '100 Percent Apple Juice – 64 fl oz Bottle', price: '$25.99', oldPrice: '$38.10', rating: 4, img: 'https://placehold.co/160x180/f0fdf4/16a34a?text=Rising+Crust' },
-  { id: 3, name: '100 Percent Apple Juice – 64 fl oz Bottle', price: '$25.99', oldPrice: '$38.10', rating: 5, img: 'https://placehold.co/160x180/fff7ed/ea580c?text=Orange+Juice' },
-  { id: 4, name: '100 Percent Apple Juice – 64 fl oz Bottle', price: '$25.99', oldPrice: '$38.10', rating: 4, img: 'https://placehold.co/160x180/1e1b4b/fff?text=Pizza' },
-  { id: 5, name: '100 Percent Apple Juice – 64 fl oz Bottle', price: '$25.99', oldPrice: '$38.10', rating: 4, img: 'https://placehold.co/160x180/fef9c3/ca8a04?text=Lays' },
-  { id: 6, name: '100 Percent Apple Juice – 64 fl oz Bottle', price: '$25.99', oldPrice: '$38.10', rating: 4, img: 'https://placehold.co/160x180/eff6ff/2563eb?text=Angel+Soft' },
+  {
+    id: 1,
+    name: 'Fresh Apple Juice – 64 fl oz Bottle',
+    price: '$25.99', oldPrice: '$38.10', rating: 4,
+    img: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=300&h=300&fit=crop'
+  },
+  {
+    id: 2,
+    name: 'Whole Grain Bread Loaf',
+    price: '$4.49', oldPrice: '$6.00', rating: 4,
+    img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&h=300&fit=crop'
+  },
+  {
+    id: 3,
+    name: 'Fresh Orange Juice – 1L',
+    price: '$5.99', oldPrice: '$8.50', rating: 5,
+    img: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&h=300&fit=crop'
+  },
+  {
+    id: 4,
+    name: 'Organic Free Range Eggs – 12 pack',
+    price: '$6.99', oldPrice: '$9.00', rating: 4,
+    img: 'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=300&h=300&fit=crop'
+  },
+  {
+    id: 5,
+    name: 'Fresh Strawberries – 500g',
+    price: '$3.99', oldPrice: '$5.50', rating: 5,
+    img: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=300&h=300&fit=crop'
+  },
+  {
+    id: 6,
+    name: 'Whole Milk – 1 Gallon',
+    price: '$4.29', oldPrice: '$5.99', rating: 4,
+    img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300&h=300&fit=crop'
+  },
+  {
+    id: 7,
+    name: 'Avocado – Pack of 4',
+    price: '$5.49', oldPrice: '$7.00', rating: 5,
+    img: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=300&h=300&fit=crop'
+  },
+  {
+    id: 8,
+    name: 'Atlantic Salmon Fillet – 500g',
+    price: '$12.99', oldPrice: '$16.00', rating: 4,
+    img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=300&h=300&fit=crop'
+  },
 ]
-
 function StarRating({ rating }) {
   return (
     <div className="flex items-center gap-0.5">
@@ -42,7 +88,7 @@ function ProductCard({ product }) {
 
   return (
     <div className="bg-white border border-gray-100 rounded-card shadow-card hover:shadow-medical transition-shadow group flex flex-col">
-      <div className="relative bg-gray-50 rounded-t-card p-4 flex items-center justify-center h-44">
+      <div className="relative bg-white-50 rounded-t-card p-4 flex items-center justify-center h-44">
         <img
           src={product.img}
           alt={product.name}
@@ -80,7 +126,7 @@ export default function PopularProductsSection() {
   const [activeTab, setActiveTab] = useState(TABS[0])
 
   return (
-    <section className="max-w-7xl mx-auto px-4 mb-10">
+    <section className="mx-auto px-4 mb-10">
 
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end gap-4 mb-5">
@@ -110,12 +156,28 @@ export default function PopularProductsSection() {
         </div>
       </div>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      {/* Products Slider */}
+      <Swiper
+        modules={[Autoplay, FreeMode]}
+        freeMode
+        autoplay={{ delay: 2500, disableOnInteraction: false, pauseOnMouseEnter: true }}
+        loop
+        slidesPerView={2}
+        spaceBetween={16}
+        breakpoints={{
+          480:  { slidesPerView: 3, spaceBetween: 16 },
+          768:  { slidesPerView: 4, spaceBetweean: 16 },
+          1024: { slidesPerView: 5, spaceBetween: 16 },
+          1280: { slidesPerView: 6, spaceBetween: 16 },
+        }}
+      >
         {PRODUCTS.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <SwiperSlide key={product.id}>
+            <ProductCard product={product} />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
+
     </section>
   )
 }

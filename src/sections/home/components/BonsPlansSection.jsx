@@ -76,7 +76,7 @@ export default function BonsPlansSection() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4">
+      <div className=" mx-auto px-4">
 
         {/* ── Header ── */}
         <div className="flex flex-col items-center mb-5">
@@ -110,7 +110,7 @@ export default function BonsPlansSection() {
         </div>
 
         {/* ── Grid ── */}
-        <div className="max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className=" grid grid-cols-1 md:grid-cols-2 gap-3">
           {PLANS.map((plan, i) => (
             <BannerCard key={plan.id} plan={plan} index={i} />
           ))}

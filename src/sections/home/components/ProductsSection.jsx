@@ -67,7 +67,7 @@ function ProductCard({ product }) {
 // ── Section Block ─────────────────────────────────────────────
 function ProductSection({ title, viewAllPath, products }) {
   return (
-    <section className="max-w-7xl mx-auto px-4 mb-10">
+    <section className=" mx-auto px-4 mb-10">
       <div className="flex items-center justify-between mb-5">
         <h2 className="font-heading text-xl font-bold text-gray-800">{title}</h2>
         <Link

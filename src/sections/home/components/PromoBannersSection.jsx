@@ -32,7 +32,7 @@ const BANNERS = [
 
 export default function PromoBannersSection() {
   return (
-    <section className="max-w-7xl mx-auto px-4 mb-10">
+    <section className=" mx-auto px-4 mb-10">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {BANNERS.map(banner => (
           <div

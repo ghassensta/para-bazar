@@ -24,7 +24,7 @@ export default function CategoriesSection() {
   const { pathname } = useLocation()
 
   return (
-    <section className="max-w-7xl mx-auto px-4 mb-8">
+    <section className=" mx-auto px-4 mb-8">
 
       {/* Header */}
       <div className="flex items-center gap-3 mb-5">

@@ -13,12 +13,14 @@ export default function HomeViewPage() {
     <>
       <HeroSection />
       <CategoriesSection />
-      <PopularProductsSection />
-      <BonsPlansSection />
-      <PromoBannersSection />
-      <ProductsSection />
-      <FideliteSection />       
-      <BlogSection />
+      <div className='bg-white'>
+        <PopularProductsSection />
+        <BonsPlansSection />
+        <PromoBannersSection />
+        <ProductsSection />
+        <FideliteSection />
+        <BlogSection />
+      </div>
     </>
   )
 }

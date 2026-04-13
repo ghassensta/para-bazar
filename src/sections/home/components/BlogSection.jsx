@@ -45,7 +45,7 @@ const TAG_COLORS = {
 
 export default function BlogSection() {
   return (
-    <section className="max-w-7xl mx-auto px-4 mb-12">
+    <section className=" mx-auto px-4 mb-12">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
