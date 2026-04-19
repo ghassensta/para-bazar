@@ -1,11 +1,13 @@
+
 import { lazy, Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
-import LayoutTheme from '../layouts/layout'
-import LoadingScreen from '../components/loading-screen/loading-screen'
-import { AuthGuard } from '../auth/guard/auth-guard'
+import LayoutTheme    from '../layouts/layout'
+import LoadingScreen  from '../components/loading-screen/loading-screen'
 
-const Index      = lazy(() => import('../pages/home/index'))
-const NotFound   = lazy(() => import('../pages/not-found'))     // ← à créer
+const Index   = lazy(() => import('../pages/home/index'))
+const Shop    = lazy(() => import('../pages/shop/index'))
+const Product = lazy(() => import('../pages/product/index'))   // ← NOUVEAU
+const NotFound = lazy(() => import('../pages/not-found'))
 
 export const routes = [
   {
@@ -18,14 +20,21 @@ export const routes = [
       </LayoutTheme>
     ),
     children: [
-      { index: true,    element: <Index /> },
-      { path: 'home',   element: <Index /> },
+      { index: true,  element: <Index /> },
+      { path: 'home', element: <Index /> },
 
-      // ── Routes catégories ──────────────────────────────────
-      { path: 'category/:slug',             element: <Index /> }, // temporaire
-      { path: 'category/:slug/:subSlug',    element: <Index /> }, // sous-catégories
+      // ── Shop ───────────────────────────────────────────────
+      { path: 'shop',                       element: <Shop /> },
+      { path: 'shop/category/:slug',        element: <Shop /> },
 
-      // ── 404 catch-all ──────────────────────────────────────
+      // ── Product detail ─────────────────────────────────────
+      { path: 'product/:id',                element: <Product /> },   // ← NOUVEAU
+
+      // ── Catégories ─────────────────────────────────────────
+      { path: 'category/:slug',             element: <Index /> },
+      { path: 'category/:slug/:subSlug',    element: <Index /> },
+
+      // ── 404 ────────────────────────────────────────────────
       { path: '*', element: <NotFound /> },
     ],
   },

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiShoppingCart, FiStar, FiArrowRight } from 'react-icons/fi'
+import ProductCard from '../../../components/product/ProductCard'
 
 // ── Star Rating ──────────────────────────────────────────────
 function StarRating({ rating }) {
@@ -19,52 +20,7 @@ function StarRating({ rating }) {
   )
 }
 
-// ── Product Card ─────────────────────────────────────────────
-function ProductCard({ product }) {
-  const [added, setAdded] = useState(false)
 
-  const handleAdd = () => {
-    setAdded(true)
-    setTimeout(() => setAdded(false), 2000)
-  }
-
-  return (
-    <div className="bg-white border border-gray-100 rounded-card shadow-card hover:shadow-medical transition-all group flex flex-col">
-      <div className="bg-gray-50 rounded-t-card p-3 flex items-center justify-center h-40">
-        <img
-          src={product.img}
-          alt={product.name}
-          className="h-32 w-full object-contain group-hover:scale-105 transition-transform duration-300"
-        />
-      </div>
-      <div className="p-3 flex flex-col gap-1.5 flex-1">
-        <Link to={`/product/${product.id}`}>
-          <h3 className="text-xs font-sans font-medium text-gray-800 leading-snug line-clamp-2 hover:text-brand-herb transition-colors">
-            {product.name}
-          </h3>
-        </Link>
-        <StarRating rating={product.rating} />
-        <div className="flex items-center gap-2 mt-0.5">
-          <span className="text-brand-herb font-bold text-sm">{product.price}</span>
-          <span className="text-gray-400 text-xs line-through">{product.oldPrice}</span>
-        </div>
-        <button
-          onClick={handleAdd}
-          className={`w-full py-1.5 rounded-btn text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors border mt-auto
-            ${added
-              ? 'bg-brand-herb text-white border-brand-herb'
-              : 'border-brand-herb text-brand-herb hover:bg-brand-herb hover:text-white'
-            }`}
-        >
-          <FiShoppingCart size={11} />
-          {added ? 'Added ✓' : 'Add to Cart'}
-        </button>
-      </div>
-    </div>
-  )
-}
-
-// ── Section Block ─────────────────────────────────────────────
 function ProductSection({ title, viewAllPath, products }) {
   return (
     <section className=" mx-auto px-4 mb-10">

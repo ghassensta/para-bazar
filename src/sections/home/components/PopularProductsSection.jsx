@@ -1,15 +1,16 @@
 // src/sections/home/components/PopularProductsSection.jsx
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { FiShoppingCart, FiStar, FiChevronRight } from 'react-icons/fi'
+import { FiChevronRight } from 'react-icons/fi'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, FreeMode } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 
+import ProductCard from '../../../components/product/ProductCard'
+
 const TABS = [
   'Breads & Bakery',
-  'Breaksfast & Dairy',
+  'Breakfast & Dairy',
   'Meats & Seafood',
   'Fruits & Vegetables',
 ]
@@ -18,109 +19,68 @@ const PRODUCTS = [
   {
     id: 1,
     name: 'Fresh Apple Juice – 64 fl oz Bottle',
-    price: '$25.99', oldPrice: '$38.10', rating: 4,
+    price: '$25.99',
+    oldPrice: '$38.10',
+    rating: 4,
     img: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=300&h=300&fit=crop'
   },
   {
     id: 2,
     name: 'Whole Grain Bread Loaf',
-    price: '$4.49', oldPrice: '$6.00', rating: 4,
+    price: '$4.49',
+    oldPrice: '$6.00',
+    rating: 4,
     img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&h=300&fit=crop'
   },
   {
     id: 3,
     name: 'Fresh Orange Juice – 1L',
-    price: '$5.99', oldPrice: '$8.50', rating: 5,
+    price: '$5.99',
+    oldPrice: '$8.50',
+    rating: 5,
     img: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&h=300&fit=crop'
   },
   {
     id: 4,
     name: 'Organic Free Range Eggs – 12 pack',
-    price: '$6.99', oldPrice: '$9.00', rating: 4,
+    price: '$6.99',
+    oldPrice: '$9.00',
+    rating: 4,
     img: 'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=300&h=300&fit=crop'
   },
   {
     id: 5,
     name: 'Fresh Strawberries – 500g',
-    price: '$3.99', oldPrice: '$5.50', rating: 5,
+    price: '$3.99',
+    oldPrice: '$5.50',
+    rating: 5,
     img: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=300&h=300&fit=crop'
   },
   {
     id: 6,
     name: 'Whole Milk – 1 Gallon',
-    price: '$4.29', oldPrice: '$5.99', rating: 4,
+    price: '$4.29',
+    oldPrice: '$5.99',
+    rating: 4,
     img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300&h=300&fit=crop'
   },
   {
     id: 7,
     name: 'Avocado – Pack of 4',
-    price: '$5.49', oldPrice: '$7.00', rating: 5,
+    price: '$5.49',
+    oldPrice: '$7.00',
+    rating: 5,
     img: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=300&h=300&fit=crop'
   },
   {
     id: 8,
     name: 'Atlantic Salmon Fillet – 500g',
-    price: '$12.99', oldPrice: '$16.00', rating: 4,
+    price: '$12.99',
+    oldPrice: '$16.00',
+    rating: 4,
     img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=300&h=300&fit=crop'
   },
 ]
-function StarRating({ rating }) {
-  return (
-    <div className="flex items-center gap-0.5">
-      {[1, 2, 3, 4, 5].map(star => (
-        <FiStar
-          key={star}
-          size={12}
-          className={star <= rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-200 fill-gray-200'}
-        />
-      ))}
-    </div>
-  )
-}
-
-function ProductCard({ product }) {
-  const [added, setAdded] = useState(false)
-
-  const handleAdd = () => {
-    setAdded(true)
-    setTimeout(() => setAdded(false), 2000)
-  }
-
-  return (
-    <div className="bg-white border border-gray-100 rounded-card shadow-card hover:shadow-medical transition-shadow group flex flex-col">
-      <div className="relative bg-white-50 rounded-t-card p-4 flex items-center justify-center h-44">
-        <img
-          src={product.img}
-          alt={product.name}
-          className="h-36 w-full object-contain group-hover:scale-105 transition-transform duration-300"
-        />
-      </div>
-      <div className="p-3 flex flex-col gap-2 flex-1">
-        <Link to={`/product/${product.id}`}>
-          <h3 className="text-sm font-sans font-medium text-gray-800 leading-snug line-clamp-2 hover:text-brand-herb transition-colors">
-            {product.name}
-          </h3>
-        </Link>
-        <StarRating rating={product.rating} />
-        <div className="flex items-center gap-2">
-          <span className="text-brand-herb font-bold text-base">{product.price}</span>
-          <span className="text-gray-400 text-xs line-through">{product.oldPrice}</span>
-        </div>
-        <button
-          onClick={handleAdd}
-          className={`w-full py-2 rounded-btn text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors border mt-auto
-            ${added
-              ? 'bg-brand-herb text-white border-brand-herb'
-              : 'border-brand-herb text-brand-herb hover:bg-brand-herb hover:text-white'
-            }`}
-        >
-          <FiShoppingCart size={12} />
-          {added ? 'Added ✓' : 'Add to Cart'}
-        </button>
-      </div>
-    </div>
-  )
-}
 
 export default function PopularProductsSection() {
   const [activeTab, setActiveTab] = useState(TABS[0])
@@ -131,8 +91,12 @@ export default function PopularProductsSection() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end gap-4 mb-5">
         <div className="min-w-fit">
-          <h2 className="font-heading text-xl font-bold text-gray-800">Popular Products</h2>
-          <p className="text-sm text-gray-400 mt-0.5">Do not miss the current offers</p>
+          <h2 className="font-heading text-xl font-bold text-gray-800">
+            Popular Products
+          </h2>
+          <p className="text-sm text-gray-400 mt-0.5">
+            Do not miss the current offers
+          </p>
         </div>
 
         {/* Tabs */}
@@ -150,6 +114,7 @@ export default function PopularProductsSection() {
               {tab}
             </button>
           ))}
+
           <button className="ml-1 p-1.5 text-gray-400 hover:text-brand-herb transition-colors">
             <FiChevronRight size={18} />
           </button>
@@ -160,13 +125,17 @@ export default function PopularProductsSection() {
       <Swiper
         modules={[Autoplay, FreeMode]}
         freeMode
-        autoplay={{ delay: 2500, disableOnInteraction: false, pauseOnMouseEnter: true }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        }}
         loop
         slidesPerView={2}
         spaceBetween={16}
         breakpoints={{
-          480:  { slidesPerView: 3, spaceBetween: 16 },
-          768:  { slidesPerView: 4, spaceBetweean: 16 },
+          480: { slidesPerView: 3, spaceBetween: 16 },
+          768: { slidesPerView: 4, spaceBetween: 16 }, // ✅ fix typo
           1024: { slidesPerView: 5, spaceBetween: 16 },
           1280: { slidesPerView: 6, spaceBetween: 16 },
         }}
